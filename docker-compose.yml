@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  rag-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=rag_db
+      - DB_USER=rag_user
+      - DB_PASSWORD=rag_password
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - postgres
+      - vector-db
+    volumes:
+      - ./uploads:/app/uploads
+    networks:
+      - rag-network
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=rag_db
+      - POSTGRES_USER=rag_user
+      - POSTGRES_PASSWORD=rag_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - rag-network
+
+  vector-db:
+    image: ghcr.io/chroma-core/chroma:0.4.22
+    ports:
+      - "8001:8000"
+    volumes:
+      - vector_data:/chroma/app/vector_database
+    environment:
+      - ANONYMIZED_TELEMETRY=False
+    networks:
+      - rag-network
+
+volumes:
+  postgres_data:
+  vector_data:
+
+networks:
+  rag-network:
+    driver: bridge

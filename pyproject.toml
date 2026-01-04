@@ -1,0 +1,35 @@
+[project]
+name = "rag_system"
+version = "1.0.0"
+description = "Enterprise RAG Knowledge Base System"
+authors = [{name = "Your Name", email = "your.email@example.com"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+langchain = "^0.0.352"
+langchain-community = "^0.0.31"
+langchain-core = "^0.1.45"
+langchain-openai = "^0.0.11"
+langchain-experimental = "^0.0.56"
+chromadb = "^0.4.22"
+faiss-cpu = "^1.7.4"
+fastapi = "^0.104.1"
+uvicorn = "^0.24.0"
+python-multipart = "^0.0.6"
+pandas = "^2.1.4"
+numpy = "^1.26.3"
+PyPDF2 = "^3.0.1"
+python-docx = "^1.1.0"
+unstructured = "^0.12.5"
+psycopg2-binary = "^2.9.9"
+sqlalchemy = "^2.0.23"
+python-jose = "^3.3.0"
+passlib = "^1.7.4"
+bcrypt = "^4.1.2"
+python-dotenv = "^1.0.0"
+pydantic = "^2.5.3"
+tiktoken = "^0.5.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
